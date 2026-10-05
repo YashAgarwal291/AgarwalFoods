@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # agarwal_foods
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# AgarwalFoods
+AgarwalFood Website
+>>>>>>> 1b59c6143edd397ad8f7b65ee66fa8cefa66b522

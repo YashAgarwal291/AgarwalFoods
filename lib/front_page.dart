@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ============================================================
 // BREAKPOINTS & RESPONSIVE HELPER
@@ -29,6 +30,8 @@ class _FrontPageState extends State<FrontPage> {
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       drawer: const ResponsiveDrawer(),
+      floatingActionButton: const WhatsAppFloatingButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -827,31 +830,31 @@ class PremiumChutneySection extends StatelessWidget {
         'image': 'assets/images/chenga.jpg',
         'description':
             'Tangy and flavorful traditional chutney made from fresh ingredients.',
-        'price': '₹120',
+        'price': '₹140',
       },
       {
         'name': 'Lasun Chutney',
         'image': 'assets/images/lasun.jpg',
         'description': 'Spicy garlic chutney perfect for parathas and snacks.',
-        'price': '₹130',
+        'price': '₹120',
       },
       {
         'name': 'Karal Chutney',
         'image': 'assets/images/kara.jpg',
         'description': 'Authentic bitter gourd chutney with a unique taste.',
-        'price': '₹140',
+        'price': '₹120',
       },
       {
         'name': 'Special Jain Chutney',
         'image': 'assets/images/jain.jpg',
         'description': 'Pure vegetarian chutney following Jain principles.',
-        'price': '₹150',
+        'price': '₹140',
       },
       {
         'name': 'Javas Chutney',
         'image': 'assets/images/javas.jpg',
         'description': 'Sweet and tangy chutney that complements every meal.',
-        'price': '₹125',
+        'price': '₹120',
       },
     ];
 
@@ -1295,7 +1298,7 @@ class GetInTouchSection extends StatelessWidget {
                   ContactItem(
                     icon: Icons.location_on_outlined,
                     title: 'Visit Us',
-                    value: 'Mumbai, Maharashtra',
+                    value: 'Solapur, Maharashtra',
                   ),
                 ],
               ),
@@ -1414,3 +1417,182 @@ class FooterSection extends StatelessWidget {
     );
   }
 }
+
+// ============================================================
+// WHATSAPP FLOATING BUTTON
+// ============================================================
+
+class WhatsAppFloatingButton extends StatefulWidget {
+  final String phoneNumber;
+  final String defaultMessage;
+
+  const WhatsAppFloatingButton({
+    super.key,
+    this.phoneNumber = '919403183903',
+    this.defaultMessage = 'Hello Agarwal Foods! I would like to inquire about your products.',
+  });
+
+  @override
+  State<WhatsAppFloatingButton> createState() => _WhatsAppFloatingButtonState();
+}
+
+class _WhatsAppFloatingButtonState extends State<WhatsAppFloatingButton> {
+  bool _isHovered = false;
+
+  Future<void> _openWhatsApp() async {
+    final encodedMessage = Uri.encodeComponent(widget.defaultMessage);
+    final urlString = 'https://wa.me/${widget.phoneNumber}?text=$encodedMessage';
+    final uri = Uri.parse(urlString);
+
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(uri);
+      }
+    } catch (e) {
+      debugPrint('Could not launch WhatsApp URL: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0, right: 8.0),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        cursor: SystemMouseCursors.click,
+        child: Tooltip(
+          message: 'Chat with us on WhatsApp',
+          textStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          decoration: BoxDecoration(
+            color: const Color(0xFF1F2937),
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 8,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: AnimatedScale(
+            scale: _isHovered ? 1.08 : 1.0,
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
+            child: Material(
+              color: Colors.transparent,
+              shape: const CircleBorder(),
+              elevation: _isHovered ? 8 : 4,
+              shadowColor: const Color(0x6625D366),
+              child: InkWell(
+                onTap: _openWhatsApp,
+                customBorder: const CircleBorder(),
+                splashColor: Colors.white.withValues(alpha: 0.3),
+                highlightColor: Colors.white.withValues(alpha: 0.15),
+                child: Container(
+                  width: 58,
+                  height: 58,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF25D366),
+                        Color(0xFF1EBE5D),
+                      ],
+                    ),
+                  ),
+                  child: Center(
+                    child: CustomPaint(
+                      size: const Size(32, 32),
+                      painter: const WhatsAppIconPainter(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class WhatsAppIconPainter extends CustomPainter {
+  final Color color;
+
+  const WhatsAppIconPainter({this.color = Colors.white});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final scale = size.width / 24.0;
+    canvas.scale(scale, scale);
+
+    final fillPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill
+      ..isAntiAlias = true;
+
+    final strokePaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.8
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..isAntiAlias = true;
+
+    // Speech bubble outline
+    final bubblePath = Path();
+    bubblePath.moveTo(12.007, 2.0);
+    bubblePath.cubicTo(6.486, 2.0, 2.0, 6.486, 2.0, 12.007);
+    bubblePath.cubicTo(2.0, 13.771, 2.46, 15.429, 3.264, 16.877);
+    bubblePath.lineTo(2.0, 22.0);
+    bubblePath.lineTo(7.241, 20.627);
+    bubblePath.cubicTo(8.643, 21.499, 10.274, 22.014, 12.007, 22.014);
+    bubblePath.cubicTo(17.528, 22.014, 22.014, 17.528, 22.014, 12.007);
+    bubblePath.cubicTo(22.014, 6.486, 17.528, 2.0, 12.007, 2.0);
+    bubblePath.close();
+
+    // Phone handset path inside bubble
+    final phonePath = Path();
+    phonePath.moveTo(17.472, 14.382);
+    phonePath.cubicTo(17.171, 14.232, 15.692, 13.503, 15.416, 13.403);
+    phonePath.cubicTo(15.14, 13.303, 14.939, 13.253, 14.738, 13.553);
+    phonePath.cubicTo(14.538, 13.853, 13.96, 14.533, 13.784, 14.733);
+    phonePath.cubicTo(13.609, 14.933, 13.433, 14.958, 13.132, 14.808);
+    phonePath.cubicTo(12.831, 14.658, 11.859, 14.339, 10.708, 13.312);
+    phonePath.cubicTo(9.812, 12.513, 9.207, 11.525, 9.031, 11.224);
+    phonePath.cubicTo(8.856, 10.923, 9.012, 10.76, 9.163, 10.61);
+    phonePath.cubicTo(9.299, 10.475, 9.464, 10.259, 9.615, 10.083);
+    phonePath.cubicTo(9.765, 9.908, 9.815, 9.782, 9.915, 9.582);
+    phonePath.cubicTo(10.015, 9.382, 9.965, 9.206, 9.89, 9.056);
+    phonePath.cubicTo(9.815, 8.906, 9.212, 7.421, 8.961, 6.815);
+    phonePath.cubicTo(8.717, 6.225, 8.468, 6.305, 8.283, 6.295);
+    phonePath.lineTo(7.705, 6.285);
+    phonePath.cubicTo(7.505, 6.285, 7.179, 6.36, 6.903, 6.661);
+    phonePath.cubicTo(6.627, 6.962, 5.85, 7.69, 5.85, 9.17);
+    phonePath.cubicTo(5.85, 10.65, 6.929, 12.08, 7.08, 12.281);
+    phonePath.cubicTo(7.23, 12.481, 9.204, 15.524, 12.225, 16.827);
+    phonePath.cubicTo(12.944, 17.137, 13.505, 17.322, 13.943, 17.461);
+    phonePath.cubicTo(14.665, 17.691, 15.322, 17.658, 15.843, 17.581);
+    phonePath.cubicTo(16.423, 17.494, 17.623, 16.854, 17.874, 16.151);
+    phonePath.cubicTo(18.124, 15.449, 18.124, 14.848, 18.049, 14.721);
+    phonePath.cubicTo(17.974, 14.595, 17.773, 14.52, 17.472, 14.382);
+    phonePath.close();
+
+    canvas.drawPath(bubblePath, strokePaint);
+    canvas.drawPath(phonePath, fillPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+

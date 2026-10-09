@@ -89,9 +89,7 @@ class ResponsiveDrawer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               decoration: const BoxDecoration(
                 color: Color(0xFFFCF8EF),
-                border: Border(
-                  bottom: BorderSide(color: Color(0xFFE5E5E5)),
-                ),
+                border: Border(bottom: BorderSide(color: Color(0xFFE5E5E5))),
               ),
               child: Row(
                 children: [
@@ -202,22 +200,36 @@ class ResponsiveDrawer extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.phone_outlined, size: 16, color: Color(0xFFFF4B00)),
+                      Icon(
+                        Icons.phone_outlined,
+                        size: 16,
+                        color: Color(0xFFFF4B00),
+                      ),
                       SizedBox(width: 8),
                       Text(
                         '+91 9403183903',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF344054)),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF344054),
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(height: 6),
                   Row(
                     children: [
-                      Icon(Icons.email_outlined, size: 16, color: Color(0xFFFF4B00)),
+                      Icon(
+                        Icons.email_outlined,
+                        size: 16,
+                        color: Color(0xFFFF4B00),
+                      ),
                       SizedBox(width: 8),
                       Text(
                         'info@agarwalfoods.com',
-                        style: TextStyle(fontSize: 13, color: Color(0xFF344054)),
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFF344054),
+                        ),
                       ),
                     ],
                   ),
@@ -386,7 +398,11 @@ class NavigationBarWidget extends StatelessWidget {
                 children: [
                   if (!isDesktop) ...[
                     IconButton(
-                      icon: const Icon(Icons.menu, size: 28, color: Color(0xFF344054)),
+                      icon: const Icon(
+                        Icons.menu,
+                        size: 28,
+                        color: Color(0xFF344054),
+                      ),
                       onPressed: onMenuPressed,
                       tooltip: 'Open Menu',
                     ),
@@ -530,7 +546,9 @@ class NavigationBarWidget extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            color: isSelected ? const Color(0xFFFF4B00) : const Color(0xFF344054),
+            color: isSelected
+                ? const Color(0xFFFF4B00)
+                : const Color(0xFF344054),
             fontSize: 16,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
           ),
@@ -658,7 +676,9 @@ class _CategoryCardState extends State<CategoryCard> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: _isHovered ? const Color(0x33000000) : const Color(0x1A000000),
+              color: _isHovered
+                  ? const Color(0x33000000)
+                  : const Color(0x1A000000),
               blurRadius: _isHovered ? 16 : 8,
               offset: Offset(0, _isHovered ? 8 : 4),
             ),
@@ -676,7 +696,11 @@ class _CategoryCardState extends State<CategoryCard> {
                 errorBuilder: (context, error, stackTrace) => Container(
                   color: const Color(0xFFFFEDDB),
                   child: const Center(
-                    child: Icon(Icons.fastfood, color: Color(0xFFFF4B00), size: 40),
+                    child: Icon(
+                      Icons.fastfood,
+                      color: Color(0xFFFF4B00),
+                      size: 40,
+                    ),
                   ),
                 ),
               ),
@@ -751,7 +775,10 @@ class HeroSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -956,7 +983,9 @@ class _ProductCardState extends State<ProductCard> {
           borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
-              color: _isHovered ? const Color(0x1F000000) : const Color(0x0D000000),
+              color: _isHovered
+                  ? const Color(0x1F000000)
+                  : const Color(0x0D000000),
               blurRadius: _isHovered ? 20 : 12,
               offset: Offset(0, _isHovered ? 8 : 4),
             ),
@@ -981,8 +1010,11 @@ class _ProductCardState extends State<ProductCard> {
                     height: 190,
                     color: Colors.grey.shade200,
                     alignment: Alignment.center,
-                    child: const Icon(Icons.image_not_supported_outlined,
-                        color: Colors.grey, size: 44),
+                    child: const Icon(
+                      Icons.image_not_supported_outlined,
+                      color: Colors.grey,
+                      size: 44,
+                    ),
                   );
                 },
               ),
@@ -1118,10 +1150,7 @@ class AboutSection extends StatelessWidget {
                       child: _buildAboutText(context, isCenter: false),
                     ),
                     const SizedBox(width: 50),
-                    Expanded(
-                      flex: 4,
-                      child: _buildStatsGrid(context),
-                    ),
+                    Expanded(flex: 4, child: _buildStatsGrid(context)),
                   ],
                 ),
         ),
@@ -1133,8 +1162,9 @@ class AboutSection extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 650;
 
     return Column(
-      crossAxisAlignment:
-          isCenter ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      crossAxisAlignment: isCenter
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         Text(
           'About Agarwal Foods',
@@ -1274,10 +1304,7 @@ class GetInTouchSection extends StatelessWidget {
               const Text(
                 'We would love to hear from you. Reach out anytime!',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF6B7280),
-                  fontSize: 15,
-                ),
+                style: TextStyle(color: Color(0xFF6B7280), fontSize: 15),
               ),
               SizedBox(height: isMobile ? 28 : 44),
               Wrap(
@@ -1340,11 +1367,7 @@ class ContactItem extends StatelessWidget {
               color: Color(0xFFFF5200),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
-            ),
+            child: Icon(icon, color: Colors.white, size: 24),
           ),
           const SizedBox(height: 14),
           Text(
@@ -1359,10 +1382,7 @@ class ContactItem extends StatelessWidget {
           Text(
             value,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xFF6B7280),
-              fontSize: 14,
-            ),
+            style: const TextStyle(color: Color(0xFF6B7280), fontSize: 14),
           ),
         ],
       ),
@@ -1382,10 +1402,7 @@ class FooterSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: const Color(0xFF182538),
-      padding: const EdgeInsets.symmetric(
-        vertical: 32,
-        horizontal: 24,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1200),
@@ -1405,10 +1422,7 @@ class FooterSection extends StatelessWidget {
               Text(
                 'Bringing authentic Indian flavors to your table',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF8E9BAE),
-                  fontSize: 13,
-                ),
+                style: TextStyle(color: Color(0xFF8E9BAE), fontSize: 13),
               ),
             ],
           ),
@@ -1429,7 +1443,8 @@ class WhatsAppFloatingButton extends StatefulWidget {
   const WhatsAppFloatingButton({
     super.key,
     this.phoneNumber = '919403183903',
-    this.defaultMessage = 'Hello Agarwal Foods! I would like to inquire about your products.',
+    this.defaultMessage =
+        'Hello Agarwal Foods! I would like to inquire about your products.',
   });
 
   @override
@@ -1441,7 +1456,8 @@ class _WhatsAppFloatingButtonState extends State<WhatsAppFloatingButton> {
 
   Future<void> _openWhatsApp() async {
     final encodedMessage = Uri.encodeComponent(widget.defaultMessage);
-    final urlString = 'https://wa.me/${widget.phoneNumber}?text=$encodedMessage';
+    final urlString =
+        'https://wa.me/${widget.phoneNumber}?text=$encodedMessage';
     final uri = Uri.parse(urlString);
 
     try {
@@ -1504,10 +1520,7 @@ class _WhatsAppFloatingButtonState extends State<WhatsAppFloatingButton> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF25D366),
-                        Color(0xFF1EBE5D),
-                      ],
+                      colors: [Color(0xFF25D366), Color(0xFF1EBE5D)],
                     ),
                   ),
                   child: Center(
@@ -1595,4 +1608,3 @@ class WhatsAppIconPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-

@@ -93,20 +93,45 @@ class ResponsiveDrawer extends StatelessWidget {
               ),
               child: Row(
                 children: [
+                  // AGARWAL FOODS LOGO
                   Container(
                     width: 48,
                     height: 48,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFFFF4B00),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xFFFF4B00).withValues(alpha: 0.25),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.06),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: const Center(
-                      child: Text(
-                        'A',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                    child: ClipOval(
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Image.asset(
+                          'assets/images/agarwal_foods_png.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: const Color(0xFFFF4B00),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'A',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -408,21 +433,45 @@ class NavigationBarWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                   ],
-                  // LOGO CIRCLE
+                  // AGARWAL FOODS LOGO
                   Container(
                     width: isMobile ? 44 : 54,
                     height: isMobile ? 44 : 54,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFFFF4B00),
+                      color: Colors.white,
+                      border: Border.all(
+                        color: const Color(0xFFFF4B00).withValues(alpha: 0.25),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.06),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
                     ),
-                    child: Center(
-                      child: Text(
-                        'A',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: isMobile ? 20 : 24,
-                          fontWeight: FontWeight.bold,
+                    child: ClipOval(
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Image.asset(
+                          'assets/images/agarwal_foods_png.png',
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: const Color(0xFFFF4B00),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'A',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: isMobile ? 20 : 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
